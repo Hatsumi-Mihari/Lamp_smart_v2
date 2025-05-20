@@ -1,0 +1,21 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.espIdfPath": "/Users/miharihatsumi/esp/v5.4.1/esp-idf",
+  "idf.pythonInstallPath": "/usr/bin/python3",
+  "idf.openOcdConfigs": [
+    "board/esp32s2-kaluga-1.cfg"
+  ],
+  "idf.port": "/dev/tty.usbmodem101",
+  "idf.toolsPath": "/Users/miharihatsumi/.espressif",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32s2"
+  },
+  "idf.flashType": "UART",
+  "files.associations": {
+    "main_state.h": "c",
+    "cstdint": "cpp",
+    "render_init.h": "c",
+    "color_spaces.h": "c",
+    "stdint.h": "c"
+  }
+}
