@@ -2,14 +2,29 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "gdbtarget",
-      "request": "attach",
-      "name": "Eclipse CDT GDB Adapter"
-    },
-    {
-      "type": "espidf",
-      "name": "Launch",
-      "request": "launch"
+      "name": "Debug ESP32-S2",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Lamp_smart_v2.elf",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/path/to/xtensa-esp32s2-elf-gdb",
+      "miDebuggerServerAddress": "192.168.1.43:3333",
+      "setupCommands": [
+        {
+          "description": "Enable pretty printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "build",
+      "stopAtEntry": true,
+      "logging": {
+        "trace": true,
+        "engineLogging": true,
+        "programOutput": true,
+        "exceptions": true
+      }
     }
   ]
 }

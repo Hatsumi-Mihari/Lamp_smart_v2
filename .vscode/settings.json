@@ -3,7 +3,7 @@
   "idf.espIdfPath": "/Users/miharihatsumi/esp/v5.4.1/esp-idf",
   "idf.pythonInstallPath": "/usr/bin/python3",
   "idf.openOcdConfigs": [
-    "board/esp32s2-kaluga-1.cfg"
+    "board/esp32s2-bridge.cfg"
   ],
   "idf.port": "/dev/tty.usbmodem101",
   "idf.toolsPath": "/Users/miharihatsumi/.espressif",
@@ -16,6 +16,7 @@
     "cstdint": "cpp",
     "render_init.h": "c",
     "color_spaces.h": "c",
-    "stdint.h": "c"
+    "stdint.h": "c",
+    "render_state.h": "c"
   }
 }

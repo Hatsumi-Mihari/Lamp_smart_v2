@@ -8,6 +8,8 @@ typedef struct RGB888 RGB888;
 typedef struct LED_RMT
 {
     uint8_t fbo_size; // Size Frame Buffer Out, from Redner_Engine State 
+    uint8_t pin_rmt_out; 
+    rmt_channel_t rmt_channel;
     RGB888 *frame_buffer; // Link for seving Frame Buffer Out, from Redner_Engine State 
     rmt_item32_t *fbo_rmt; // Local dynamic buffer for send data on led strit
 }LED_RMT;
