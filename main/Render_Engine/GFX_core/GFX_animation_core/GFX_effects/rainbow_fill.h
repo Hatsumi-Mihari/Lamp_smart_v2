@@ -10,9 +10,11 @@ typedef struct Rainbow_effect_obj
 {
     RGB888 Color_Fill_Start;
     bool revers_flag;
-    uint8_t step_change;
+    uint8_t mode;
+    uint16_t pos_range_x1;
+    uint16_t pos_range_x2;
     Render_FBO_State *Render_FBO_State;
 }Rainbow_effect_obj;
 
-void ranibow_one_color_fill(void* arg_fuction);
+void ranibow_one_color_fill(void* arg_fuction, float *progress);
 #endif

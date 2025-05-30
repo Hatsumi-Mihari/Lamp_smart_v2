@@ -41,7 +41,8 @@ void DB_UART_out_log_time_redner_part_pipeLine(const char *name, int64_t time_st
 }
 
 void DB_UART_out_log_pipeline_animations(GFX_state_animation* obj){
-    ESP_LOGI("Animation gueue", "name: %s, loop_infinity: %d, delay_ms: %d", obj->name, obj->flag_loop_infinity, obj->delay_qs);
+    ESP_LOGI("Animation gueue", 
+        "name: %s, loop_infinity: %d, duration: %ld ms, progress: %f ,elapsed_time: %ld ms", obj->name, obj->flag_loop_infinity, obj->duration_ms, obj->progress, obj->elapsed_time);
 }
 
 void DB_UART_get_all_info_about_render_pipeline(List* RE_DB_List_time_PipeLine){

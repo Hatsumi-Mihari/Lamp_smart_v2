@@ -21,6 +21,7 @@ typedef struct Render_State
     List                        *Queue_GFT_Animation;
 
     uint64_t                    drawn_frames;
+    bool                        flag_clear_fbo;
     
 }Render_State;
 

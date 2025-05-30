@@ -4,6 +4,7 @@
 #include "Render_Engine/lib/RGB_prototype.h"
 #include "Render_Engine/lib/STL_Lib/List.h"
 #include "Render_Engine/RE_DEBUG/RE_Time_Layer_proto.h"
+#include "Render_Engine/GFX_core/GFX_animation_core/GFX_maneger_animation.h"
 #include "Render_Engine/RE_DEBUG/RE_DEBUG.h"
 #include "esp_heap_caps.h"
 #include "esp_timer.h"
@@ -26,8 +27,11 @@ void render_loop(Render_State *Render_State)
 {
     DB_UART_update_watchdog_time_render_pipeline(Render_State->List_GFX_PipeLine, 0, esp_timer_get_time(), 0);
 
-    //GFX_Clear_FBO(&Render_State->GFX_Utils_Config->GFX_Color_Clear, Render_State->fbo_state);
     //GFX_Fill_Color((RGB888){255, 0 , 0}, Render_State->fbo_state);
+    tick_update_animations(Render_State->Queue_GFT_Animation, &Render_State->flag_clear_fbo);
+    if (Render_State->flag_clear_fbo){
+        GFX_Clear_FBO(&Render_State->GFX_Utils_Config->GFX_Color_Clear, Render_State->fbo_state);
+    }
 
     DB_UART_update_watchdog_time_render_pipeline(Render_State->List_GFX_PipeLine, 0, -1, esp_timer_get_time());
     Render_State->drawn_frames++;

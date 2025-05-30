@@ -11,3 +11,5 @@ typedef struct GFX_Utils_Config
 void GFX_Clear_FBO(RGB888 *Color_Clear, Render_FBO_State *Render_FBO_State);
 void GFX_Fill_Color(RGB888 Color, Render_FBO_State *Render_FBO_State);
 
+void GFX_Fill_Color_range(uint16_t pos_x1, uint16_t pos_x2, RGB888 Color, Render_FBO_State *Render_FBO_State);
+

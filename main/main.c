@@ -33,11 +33,7 @@ void app_main(void)
         .GFX_Color_Clear = (RGB888){0, 0, 0}};
 
     Render_Timer_Config timer_debug = {
-        .ms_loop_update = 16666
-    };
-
-    Render_Timer_Config timer_animation_loop_config = {
-        .ms_loop_update = 100000
+        .ms_loop_update = 160666
     };
 
     Render_State render_state = {
@@ -52,18 +48,49 @@ void app_main(void)
     Render_init_debug_loop(&timer_debug, &render_state);
 
     add_animation_pipeline(render_state.Queue_GFT_Animation, (GFX_state_animation){
-        .name = "Test CallBack FN",
+        .name = "Fill Range Animation 1",
         .callback_function = &ranibow_one_color_fill,
-        .delay_qs = 150000,
-        .tickrat_qs = 1200,
+        .duration_ms = 500,
+        .tick_interval = 1,
+        .flag_loop_infinity = true,
+        .arg_fuction = &(Rainbow_effect_obj){
+            .Color_Fill_Start = (RGB888) {0,0,0},
+            .Render_FBO_State = render_state.fbo_state,
+            .mode = 1,
+            .pos_range_x1 = 0,
+            .pos_range_x2 = *render_state.fbo_state->FBO_x_size / 3
+        }
+    });
+
+    add_animation_pipeline(render_state.Queue_GFT_Animation, (GFX_state_animation){
+        .name = "Fill Range Animation 2",
+        .callback_function = &ranibow_one_color_fill,
+        .duration_ms = 200,
+        .tick_interval = 1,
+        .flag_loop_infinity = true,
+        .arg_fuction = &(Rainbow_effect_obj){
+            .Color_Fill_Start = (RGB888) {0,0,0},
+            .Render_FBO_State = render_state.fbo_state,
+            .mode = 1,
+            .pos_range_x1 = 24,
+            .pos_range_x2 = 48
+        }
+    });
+
+    add_animation_pipeline(render_state.Queue_GFT_Animation, (GFX_state_animation){
+        .name = "Fill Range Animation 2",
+        .callback_function = &ranibow_one_color_fill,
+        .duration_ms = 300,
+        .tick_interval = 1,
         .flag_loop_infinity = false,
         .arg_fuction = &(Rainbow_effect_obj){
             .Color_Fill_Start = (RGB888) {0,0,0},
             .Render_FBO_State = render_state.fbo_state,
-            .step_change = 12
+            .mode = 1,
+            .pos_range_x1 = 48,
+            .pos_range_x2 = *render_state.fbo_state->FBO_x_size
         }
     });
-    run_animation_timer_loop(&timer_animation_loop_config, render_state.Queue_GFT_Animation);
     /**/
 
     debug_State_FBO_UART(&render_state);
@@ -71,7 +98,7 @@ void app_main(void)
 
     while (1) {
         render_loop(&render_state);
-        vTaskDelay(pdMS_TO_TICKS(200));
+        vTaskDelay(pdMS_TO_TICKS(17));
     }
     printf("Hello ESP32-S2");
 }
