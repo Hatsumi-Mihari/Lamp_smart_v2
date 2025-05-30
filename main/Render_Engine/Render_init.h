@@ -6,6 +6,9 @@ typedef struct Render_FBO_State
 {
     uint8_t *FBO_x_size;
     RGB888* fbo;
+
+    uint8_t FBO_divider_size_fill;
+    uint8_t FBO_divide_size_cash;
 }Render_FBO_State;
                                 
 void init_Render_FBO(Render_FBO_State* FBO);

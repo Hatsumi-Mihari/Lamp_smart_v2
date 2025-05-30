@@ -5,7 +5,7 @@
   "idf.openOcdConfigs": [
     "board/esp32s2-bridge.cfg"
   ],
-  "idf.port": "/dev/tty.usbmodem101",
+  "idf.port": "/dev/tty.usbmodem1101",
   "idf.toolsPath": "/Users/miharihatsumi/.espressif",
   "idf.customExtraVars": {
     "IDF_TARGET": "esp32s2"
@@ -17,6 +17,15 @@
     "render_init.h": "c",
     "color_spaces.h": "c",
     "stdint.h": "c",
-    "render_state.h": "c"
+    "render_state.h": "c",
+    "list.h": "c",
+    "gfx_utils.h": "c",
+    "chrono": "c",
+    "text_encoding": "c",
+    "typeinfo": "c",
+    "string.h": "c",
+    "stdlib.h": "c",
+    "stdbool.h": "c",
+    "rgb_prototype.h": "c"
   }
 }

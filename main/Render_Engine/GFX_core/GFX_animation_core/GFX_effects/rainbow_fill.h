@@ -1,0 +1,18 @@
+#ifndef RAINBOW_FILL_H
+#define RAINBOW_FILL_H
+#include "Render_Engine/lib/RGB_prototype.h"
+#include <stdint.h>
+#include <stdbool.h>
+
+typedef struct Render_FBO_State Render_FBO_State;
+
+typedef struct Rainbow_effect_obj
+{
+    RGB888 Color_Fill_Start;
+    bool revers_flag;
+    uint8_t step_change;
+    Render_FBO_State *Render_FBO_State;
+}Rainbow_effect_obj;
+
+void ranibow_one_color_fill(void* arg_fuction);
+#endif
