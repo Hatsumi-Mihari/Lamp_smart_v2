@@ -6,6 +6,8 @@
 #include "esp_timer.h"
 #include "Render_Engine/lib/RGB_prototype.h"
 
+#define MS_IN_QS_VALUE 1000
+
 List *init_animation_queue()
 {
     List *Queue_animation = (List *)heap_caps_malloc(sizeof(List), MALLOC_CAP_SPIRAM);
@@ -15,7 +17,7 @@ List *init_animation_queue()
 
 void add_animation_pipeline(List *Queue_animation, GFX_state_animation animation)
 {
-    
+
     list_push(Queue_animation, &animation);
 }
 
@@ -28,6 +30,7 @@ void tick_update_animations(List *Queue_animation, bool *flag_clear_fbo)
 {
     GFX_state_animation *animation_t;
     bool obj_removed = false;
+    int64_t colc_tick = 0;
     for (int i = 0; i < Queue_animation->size; i++)
     {
         animation_t = (GFX_state_animation *)list_get(Queue_animation, i);
@@ -35,7 +38,10 @@ void tick_update_animations(List *Queue_animation, bool *flag_clear_fbo)
         if (animation_t->elapsed_time >= animation_t->duration_ms)
         {
             if (animation_t->flag_loop_infinity)
+            {
                 animation_t->elapsed_time = 0;
+                animation_t->time_start = esp_timer_get_time();
+            }
             else
             {
                 obj_removed = true;
@@ -46,14 +52,14 @@ void tick_update_animations(List *Queue_animation, bool *flag_clear_fbo)
             }
         }
 
-        if (animation_t->callback_function)
+        if ((esp_timer_get_time() - animation_t->time_start) >= animation_t->tick_interval_qs)
         {
             animation_t->progress = (float)animation_t->elapsed_time / animation_t->duration_ms;
             animation_t->callback_function(animation_t->arg_fuction, &animation_t->progress);
             obj_removed = false;
             *flag_clear_fbo = obj_removed;
-        }
 
-        animation_t->elapsed_time += animation_t->tick_interval;
+            animation_t->elapsed_time += (animation_t->tick_interval_qs / MS_IN_QS_VALUE);
+        }
     }
 }

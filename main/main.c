@@ -16,10 +16,12 @@
 
 void app_main(void)
 {
-    Devices_store devices_store;
+    Devices_store devices_store = {
+        .x_size = 72
+    };
     init_Main_State(&devices_store);
 
-    devices_store.led_rmt->fbo_size = 72;
+    devices_store.led_rmt->fbo_size = 144;
     devices_store.led_rmt->pin_rmt_out = 12;
     devices_store.led_rmt->rmt_channel = RMT_CHANNEL_3;
     led_init(devices_store.led_rmt);
@@ -33,7 +35,7 @@ void app_main(void)
         .GFX_Color_Clear = (RGB888){0, 0, 0}};
 
     Render_Timer_Config timer_debug = {
-        .ms_loop_update = 160666
+        .ms_loop_update = 66666
     };
 
     Render_State render_state = {
@@ -47,48 +49,29 @@ void app_main(void)
 
     Render_init_debug_loop(&timer_debug, &render_state);
 
+
     add_animation_pipeline(render_state.Queue_GFT_Animation, (GFX_state_animation){
-        .name = "Fill Range Animation 1",
-        .callback_function = &ranibow_one_color_fill,
-        .duration_ms = 500,
-        .tick_interval = 1,
+        .name = "Rainbow Range Animation 1",
+        .callback_function = &ranibow_linery_gradient,
+        .duration_ms = 1000,
+        .tick_interval_qs = 1000,
+        .time_start = esp_timer_get_time(),
         .flag_loop_infinity = true,
-        .arg_fuction = &(Rainbow_effect_obj){
-            .Color_Fill_Start = (RGB888) {0,0,0},
-            .Render_FBO_State = render_state.fbo_state,
-            .mode = 1,
+        .arg_fuction = &(Rainbow_effect_gradient){
+            .color_1 = {
+                .hue = 0.0f,
+                .ligthness = 0.5f,
+                .sturation = 1.0f
+            },
+            .color_2 = {
+                .hue = 45.0f,
+                .ligthness = 0.5f,
+                .sturation = 1.0f
+            },
+            .speed = 0.5f,
             .pos_range_x1 = 0,
-            .pos_range_x2 = *render_state.fbo_state->FBO_x_size / 3
-        }
-    });
-
-    add_animation_pipeline(render_state.Queue_GFT_Animation, (GFX_state_animation){
-        .name = "Fill Range Animation 2",
-        .callback_function = &ranibow_one_color_fill,
-        .duration_ms = 200,
-        .tick_interval = 1,
-        .flag_loop_infinity = true,
-        .arg_fuction = &(Rainbow_effect_obj){
-            .Color_Fill_Start = (RGB888) {0,0,0},
-            .Render_FBO_State = render_state.fbo_state,
-            .mode = 1,
-            .pos_range_x1 = 24,
-            .pos_range_x2 = 48
-        }
-    });
-
-    add_animation_pipeline(render_state.Queue_GFT_Animation, (GFX_state_animation){
-        .name = "Fill Range Animation 2",
-        .callback_function = &ranibow_one_color_fill,
-        .duration_ms = 300,
-        .tick_interval = 1,
-        .flag_loop_infinity = false,
-        .arg_fuction = &(Rainbow_effect_obj){
-            .Color_Fill_Start = (RGB888) {0,0,0},
-            .Render_FBO_State = render_state.fbo_state,
-            .mode = 1,
-            .pos_range_x1 = 48,
-            .pos_range_x2 = *render_state.fbo_state->FBO_x_size
+            .pos_range_x2 = *render_state.fbo_state->FBO_x_size,
+            .Render_FBO_State = render_state.fbo_state
         }
     });
     /**/
@@ -98,6 +81,7 @@ void app_main(void)
 
     while (1) {
         render_loop(&render_state);
+        //ws2812_redner(devices_store.led_rmt);
         vTaskDelay(pdMS_TO_TICKS(17));
     }
     printf("Hello ESP32-S2");

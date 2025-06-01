@@ -32,3 +32,27 @@ void GFX_Fill_Color_range(uint16_t pos_x1, uint16_t pos_x2, RGB888 Color, Render
         Render_FBO_State->fbo[i] = Color;
     }
 }
+
+void GFX_gen_hsl_gradient(uint16_t pos_x1, uint16_t pos_x2, HSL_color color_1, HSL_color color_2, Render_FBO_State *Render_FBO_State){
+    HSL_color color_interpolate;
+
+    if (pos_x1 < 0 || pos_x2 > Render_FBO_State->FBO_x_size) return;
+    float delta = color_2.hue - color_1.hue;
+    if (delta > 180.0f) delta -= 360.0f;
+    if (delta < -180.0f) delta += 360.0f;
+
+    float t = 0.0f;
+
+    for (int i = pos_x1; i < pos_x2; i++){
+        t = (float)i / (pos_x2 - 1);
+
+        color_interpolate.hue = color_1.hue + delta * t;
+        if (color_interpolate.hue < 0.0f) color_interpolate.hue += 360.0f;
+        if (color_interpolate.hue >= 360.0f) color_interpolate.hue -= 360.0f;
+
+        color_interpolate.ligthness = color_1.ligthness + (color_2.ligthness - color_1.ligthness) * t;
+        color_interpolate.sturation = color_1.sturation + (color_2.sturation - color_1.sturation) * t;
+        Render_FBO_State->fbo[i] = gen_pixel_HSL_RGB(color_interpolate);
+    }
+
+}

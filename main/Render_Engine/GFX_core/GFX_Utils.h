@@ -1,4 +1,5 @@
 #include "Render_Engine/lib/RGB_prototype.h"
+#include "Render_Engine/lib/HSL_color.h"
 
 typedef struct Render_FBO_State Render_FBO_State;
 
@@ -13,3 +14,4 @@ void GFX_Fill_Color(RGB888 Color, Render_FBO_State *Render_FBO_State);
 
 void GFX_Fill_Color_range(uint16_t pos_x1, uint16_t pos_x2, RGB888 Color, Render_FBO_State *Render_FBO_State);
 
+void GFX_gen_hsl_gradient(uint16_t pos_x1, uint16_t pos_x2, HSL_color color_1, HSL_color color_2, Render_FBO_State *Render_FBO_State);

@@ -15,8 +15,9 @@ typedef struct GFX_state_animation
     void* arg_fuction;
 
     uint32_t duration_ms;
-    uint32_t tick_interval; 
+    uint32_t tick_interval_qs; 
     uint32_t elapsed_time;
+    int64_t time_start;
     float progress;
     bool flag_loop_infinity;
 }GFX_state_animation;
