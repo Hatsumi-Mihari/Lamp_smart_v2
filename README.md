@@ -1,19 +1,8 @@
-# _Sample project_
+# _ESP32-Smart-IoT-Led-controller_
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+This project is a controller for LED strips type WS2812Bб with WiFi control via web interface, and can be run on ESP32 microcontrollers, which are equipped with SPIRAM, (ESP32, ESP32-S2, ESP32-S3, ESP32-C3), in the future it may be better optimized for these three (ESP32, ESP32-S3, ESP32-C3) platforms since the project is optimized for ESP32-S2. The project is currently in pre-beta, and at the moment, basic rendering functions and animation queues are implemented.
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
-
-
-
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
-
-## Example folder contents
-
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+The project does not use external libraries except those in the ESP-IDF development environment.
 
 ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
 files that provide set of directives and instructions describing the project's source files and targets
@@ -22,11 +11,40 @@ files that provide set of directives and instructions describing the project's s
 Below is short explanation of remaining files in the project folder.
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+main/
+┣ Render_Engine/
+┃ ┣ GFX_core/
+┃ ┃ ┣ GFX_animation_core/
+┃ ┃ ┃ ┣ GFX_effects/
+┃ ┃ ┃ ┃ ┣ rainbow_fill.c
+┃ ┃ ┃ ┃ ┗ rainbow_fill.h
+┃ ┃ ┃ ┣ GFX_maneger_animation.c
+┃ ┃ ┃ ┗ GFX_maneger_animation.h
+┃ ┃ ┣ GFX_Utils.c
+┃ ┃ ┗ GFX_Utils.h
+┃ ┣ RE_DEBUG/
+┃ ┃ ┣ RE_DEBUG.c
+┃ ┃ ┣ RE_DEBUG.h
+┃ ┃ ┗ RE_Time_Layer_proto.h
+┃ ┣ lib/
+┃ ┃ ┣ STL_Lib/
+┃ ┃ ┃ ┣ List.c
+┃ ┃ ┃ ┗ List.h
+┃ ┃ ┣ Color_Spaces.c
+┃ ┃ ┣ Color_Spaces.h
+┃ ┃ ┣ HSL_color.c
+┃ ┃ ┣ HSL_color.h
+┃ ┃ ┗ RGB_prototype.h
+┃ ┣ Render_State.c
+┃ ┣ Render_State.h
+┃ ┣ Render_init.c
+┃ ┗ Render_init.h
+┣ main/
+┃ ┣ Devices_store.c
+┃ ┣ Devices_store.h
+┃ ┣ LED_RTM.c
+┃ ┗ LED_RTM.h
+┣ CMakeList                  This is the file you are currently reading
 ```
 Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
 They are not used or needed when building with CMake and idf.py.
