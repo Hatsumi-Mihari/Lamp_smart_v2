@@ -1,4 +1,4 @@
-# _ESP32-Smart-IoT-Led-controller_
+# _ESP32-WiFi-IoT-Led-controller_
 
 This project is a controller for LED strips type WS2812Bб with WiFi control via web interface, and can be run on ESP32 microcontrollers, which are equipped with SPIRAM, (ESP32, ESP32-S2, ESP32-S3, ESP32-C3), in the future it may be better optimized for these three (ESP32, ESP32-S3, ESP32-C3) platforms since the project is optimized for ESP32-S2. The project is currently in pre-beta, and at the moment, basic rendering functions and animation queues are implemented.
 
