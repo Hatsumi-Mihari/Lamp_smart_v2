@@ -21,6 +21,8 @@ typedef struct Rainbow_effect_gradient
 {
     HSL_color color_1;
     HSL_color color_2;
+    HSL_color color_cash_buffer[4];
+    float t_cash_buffer[4];
     float speed;
     uint16_t pos_range_x1;
     uint16_t pos_range_x2;

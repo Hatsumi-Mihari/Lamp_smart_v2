@@ -36,5 +36,5 @@ void ranibow_linery_gradient(void *arg_fuction, float *progress)
     obj->color_1.hue += nolmal_speed;
     obj->color_2.hue += nolmal_speed;
 
-    GFX_gen_hsl_gradient(obj->pos_range_x1, obj->pos_range_x2, obj->color_1, obj->color_2, obj->Render_FBO_State);
+    GFX_gen_hsl_gradient(obj->pos_range_x1, obj->pos_range_x2, obj->color_1, obj->color_2, obj->Render_FBO_State, obj->color_cash_buffer, obj->t_cash_buffer);
 }

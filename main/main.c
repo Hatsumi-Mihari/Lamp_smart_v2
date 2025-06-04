@@ -21,7 +21,7 @@ void app_main(void)
     };
     init_Main_State(&devices_store);
 
-    devices_store.led_rmt->fbo_size = 144;
+    devices_store.led_rmt->fbo_size = 72;
     devices_store.led_rmt->pin_rmt_out = 12;
     devices_store.led_rmt->rmt_channel = RMT_CHANNEL_3;
     led_init(devices_store.led_rmt);
@@ -35,7 +35,7 @@ void app_main(void)
         .GFX_Color_Clear = (RGB888){0, 0, 0}};
 
     Render_Timer_Config timer_debug = {
-        .ms_loop_update = 66666
+        .ms_loop_update = 166666
     };
 
     Render_State render_state = {
@@ -53,8 +53,8 @@ void app_main(void)
     add_animation_pipeline(render_state.Queue_GFT_Animation, (GFX_state_animation){
         .name = "Rainbow Range Animation 1",
         .callback_function = &ranibow_linery_gradient,
-        .duration_ms = 1000,
-        .tick_interval_qs = 1000,
+        .duration_ms = 5000,
+        .tick_interval_ms = 1000,
         .time_start = esp_timer_get_time(),
         .flag_loop_infinity = true,
         .arg_fuction = &(Rainbow_effect_gradient){
@@ -68,7 +68,7 @@ void app_main(void)
                 .ligthness = 0.5f,
                 .sturation = 1.0f
             },
-            .speed = 0.5f,
+            .speed = 0.8f,
             .pos_range_x1 = 0,
             .pos_range_x2 = *render_state.fbo_state->FBO_x_size,
             .Render_FBO_State = render_state.fbo_state

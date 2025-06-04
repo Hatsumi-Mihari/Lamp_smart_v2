@@ -15,11 +15,12 @@ typedef struct GFX_state_animation
     void* arg_fuction;
 
     uint32_t duration_ms;
-    uint32_t tick_interval_qs; 
-    uint32_t elapsed_time;
-    int64_t time_start;
+    uint32_t tick_interval_ms; 
     float progress;
     bool flag_loop_infinity;
+
+    uint64_t elapsed_time;
+    uint64_t time_start;
 }GFX_state_animation;
 
 void linery_color_fill(void* arg_fuction);

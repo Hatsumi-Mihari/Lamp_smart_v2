@@ -42,7 +42,7 @@ void DB_UART_out_log_time_redner_part_pipeLine(const char *name, int64_t time_st
 
 void DB_UART_out_log_pipeline_animations(GFX_state_animation* obj){
     ESP_LOGI("Animation gueue", 
-        "name: %s, loop_infinity: %d, duration: %ld ms, progress: %f ,elapsed_time: %ld ms", obj->name, obj->flag_loop_infinity, obj->duration_ms, obj->progress, obj->elapsed_time);
+        "name: %s, loop_infinity: %d, duration: %ld ms, time_start: %lld , progress: %f ,elapsed_time: %lld ms", obj->name, obj->flag_loop_infinity, obj->duration_ms, obj->time_start, obj->progress, obj->elapsed_time );
 }
 
 void DB_UART_get_all_info_about_render_pipeline(List* RE_DB_List_time_PipeLine){
@@ -71,6 +71,10 @@ void DB_UART_update_watchdog_time_render_pipeline(List *RE_DB_List_time_PipeLine
 void DB_UART_redner_debug_loop_callback(void *arg){
     Render_State *Render_State_t = (Render_State*)arg;
     debug_Render_State_FBO_RGB_UART(Render_State_t);    
+    ESP_LOGI("Project_name", "ESP32-WiFi-IoT-Led-controller");
+    ESP_LOGI("Platform", "ESP32-S2");
+    ESP_LOGI("Version", "Alpha 0.1.8\n");
+
     ESP_LOGI("DRAM total", "%d bytes", (int)(heap_caps_get_total_size(MALLOC_CAP_INTERNAL)));
     ESP_LOGI("PSRAM total", "%d bytes\n", (int)(heap_caps_get_total_size(MALLOC_CAP_SPIRAM)));
 
